@@ -1,0 +1,32 @@
+{
+  "name": "lecafeadd.fr",
+  "version": "3.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:treefarmstudio/lecafeadd.fr"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "lint": "biome ci . --diagnostic-level=error",
+    "lint-apply": "biome check . --write",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/lit": "^4.0.1",
+    "@astrojs/mdx": "^2.1.1",
+    "@astrojs/sitemap": "^0.1.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@biomejs/biome": "^1.9.3",
+    "@iconify-json/ic": "^1.1.17",
+    "@iconify-json/mdi": "^1.1.64",
+    "@webcomponents/template-shadowroot": "^0.2.1",
+    "astro": "^4.15.9",
+    "astro-icon": "^1.1.0",
+    "date-fns": "^2.28.0",
+    "lit": "^3.1.2",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3"
+  }
+}
