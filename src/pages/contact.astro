@@ -1,13 +1,14 @@
 ---
-import { Container } from '@components/odyssey-theme'
-import { contactDetails } from 'data/contact'
-import ContactForm from '../components/forms/ContactForm.astro'
-import Layout from '../layouts/Page.astro'
+import { Container } from "@components/odyssey-theme";
+import { contactDetails } from "data/contact";
+import ContactForm from "../components/forms/ContactForm.astro";
+import Layout from "../layouts/Page.astro";
+import settings from "./../config/settings";
 
 const seo = {
-  title: 'Contact | Astro Odyssey Theme',
-  description: 'Contact Page',
-}
+	title: `Contact | ${settings.name}`,
+	description: "Page de contact",
+};
 ---
 
 <Layout seo={seo}>
