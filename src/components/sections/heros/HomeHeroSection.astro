@@ -2,7 +2,6 @@
 import { Button, Container } from "@components/odyssey-theme";
 import { Icon } from "astro-icon/components";
 import { homeDetails } from "data/home";
-import settings from "../../../config/settings";
 ---
 
 <Container>
@@ -13,7 +12,7 @@ import settings from "../../../config/settings";
 				{homeDetails.description}
 			</p>
 			<div class="hero-btns__container">
-				<Button href="/theme/get-started" customIcon
+				<Button href={homeDetails.cta.url} customIcon
 					>{homeDetails.cta.title}
 					<Fragment slot="icon">
 						<Icon name="ic:baseline-chevron-right" />

@@ -19,7 +19,8 @@ export const aboutDetails = {
     {
       date: '22 janvier 2025',
       title: 'Début des travaux',
-      description: 'Les travaux de création du café sont démarrés afin de préparer le lieu fourni par la mairie.',
+      description:
+        'Les travaux de création du café sont démarrés afin de préparer le lieu fourni par la mairie. Premier bilan : déplacement des encombrants, terrassement / aplanissement du terrain, démolition du plafond du réfectoire...',
     },
     {
       date: '05 octobre 2025',

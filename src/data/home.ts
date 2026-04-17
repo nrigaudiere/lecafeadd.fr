@@ -4,6 +4,6 @@ export const homeDetails = {
   imageUrl: '/assets/images/home/home.png',
   cta: {
     title: "Adhérer à l'association",
-    url: '',
+    url: '/join',
   },
 }

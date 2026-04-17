@@ -22,29 +22,30 @@ export const footerSocials = [
 ]
 
 export const footerLists = [
-  {
-    title: 'Landing Pages',
-    items: [
-      {
-        title: 'Landing Page 1',
-        slug: '/landing-pages/landing-1',
-      },
-      {
-        title: 'Landing Page 2',
-        slug: '/landing-pages/landing-2',
-      },
-      // {
-      // 	title: 'Landing Page 3',
-      // 	slug: '/landing-pages/landing-3',
-      // },
-    ],
-  },
+  // {
+  //   title: 'Landing Pages',
+  //   items: [
+  //     {
+  //       title: 'Landing Page 1',
+  //       slug: '/landing-pages/landing-1',
+  //     },
+  //     {
+  //       title: 'Landing Page 2',
+  //       slug: '/landing-pages/landing-2',
+  //     },
+  //     // {
+  //     // 	title: 'Landing Page 3',
+  //     // 	slug: '/landing-pages/landing-3',
+  //     // },
+  //   ],
+  // },
+  { title: '', items: [] },
   {
     title: 'Le café',
     items: [
       {
-        title: 'Blog',
-        slug: '/blog',
+        title: 'Évènements',
+        slug: '/events',
       },
       {
         title: 'Nous contacter',
@@ -57,11 +58,11 @@ export const footerLists = [
     ],
   },
   {
-    title: 'Theme',
+    title: 'Infos pratiques',
     items: [
       {
         title: "Adhérer à l'association",
-        slug: '/theme/get-started',
+        slug: '/join',
       },
       // {
       //   title: 'Style Guide',
