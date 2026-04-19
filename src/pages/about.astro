@@ -1,15 +1,15 @@
 ---
-import { TextSection } from "@components/odyssey-theme";
-import { aboutDetails } from "data/about";
-import HeroSection from "../components/sections/heros/HeroSection.astro";
-import Layout from "../layouts/Page.astro";
-import Timeline from "@components/ui/Timeline.astro";
-import settings from "./../config/settings";
+import { TextSection } from '@components/odyssey-theme'
+import Timeline from '@components/ui/Timeline.astro'
+import { aboutDetails } from 'data/about'
+import HeroSection from '../components/sections/heros/HeroSection.astro'
+import Layout from '../layouts/Page.astro'
+import settings from './../config/settings'
 
 const seo = {
   title: `A propos | ${settings.name}`,
-  description: "A propos du café associatif de Droue sur Drouette",
-};
+  description: 'A propos du café associatif de Droue sur Drouette',
+}
 ---
 
 <Layout {seo}>

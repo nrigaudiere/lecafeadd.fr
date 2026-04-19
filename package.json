@@ -1,35 +1,35 @@
 {
-	"name": "lecafeadd.fr",
-	"version": "3.1.0",
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:treefarmstudio/lecafeadd.fr"
-	},
-	"scripts": {
-		"dev": "astro dev",
-		"start": "astro dev",
-		"build": "astro build",
-		"lint": "biome ci . --diagnostic-level=error",
-		"lint-apply": "biome check . --write",
-		"preview": "astro preview"
-	},
-	"devDependencies": {
-		"@astrojs/lit": "4.3.0",
-		"@astrojs/mdx": "5.0.3",
-		"@astrojs/sitemap": "3.7.2",
-		"@biomejs/biome": "^1.9.4",
-		"@iconify-json/ic": "^1.2.4",
-		"@iconify-json/mdi": "^1.2.3",
-		"@webcomponents/template-shadowroot": "^0.2.1",
-		"astro": "6.1.8",
-		"astro-icon": "^1.1.5",
-		"lit": "^3.3.2",
-		"typescript": "^6.0.3"
-	},
-	"dependencies": {
-		"@tailwindcss/vite": "^4.2.2",
-		"daisyui": "^5.5.19",
-		"dayjs": "^1.11.20",
-		"tailwindcss": "^4.2.2"
-	}
+  "name": "lecafeadd.fr",
+  "version": "3.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:treefarmstudio/lecafeadd.fr"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "lint": "biome ci . --diagnostic-level=error",
+    "lint-apply": "biome check . --write",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/lit": "4.3.0",
+    "@astrojs/mdx": "5.0.3",
+    "@astrojs/sitemap": "3.7.2",
+    "@biomejs/biome": "^1.9.4",
+    "@iconify-json/ic": "^1.2.4",
+    "@iconify-json/mdi": "^1.2.3",
+    "@webcomponents/template-shadowroot": "^0.2.1",
+    "astro": "6.1.8",
+    "astro-icon": "^1.1.5",
+    "lit": "^3.3.2",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
+    "daisyui": "^5.5.19",
+    "dayjs": "^1.11.20",
+    "tailwindcss": "^4.2.2"
+  }
 }

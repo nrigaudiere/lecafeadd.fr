@@ -1,16 +1,10 @@
 ---
-import {
-  BlogPostsList,
-  Container,
-  TextCardSection,
-} from "@components/odyssey-theme";
-import { dates } from "@utils/dates";
+import { BlogPostsList, Container, TextCardSection } from '@components/odyssey-theme'
+import { dates } from '@utils/dates'
 // import NewsletterForm from "../../components/forms/NewsletterForm.astro";
-import Layout from "../../layouts/Page.astro";
+import Layout from '../../layouts/Page.astro'
 
-const posts = Object.values(
-  await import.meta.glob("./posts/*.mdx", { eager: true }),
-)
+const posts = Object.values(await import.meta.glob('./posts/*.mdx', { eager: true }))
   .map(({ frontmatter, url }) => ({
     title: frontmatter.title,
     description: frontmatter.description,
@@ -21,16 +15,16 @@ const posts = Object.values(
     href: url,
   }))
   .sort((a, b) => {
-    if (dates.isBefore(a.eventDate, b.eventDate)) return 1;
-    if (dates.isBefore(b.eventDate, a.eventDate)) return -1;
-    return 0;
-  });
+    if (dates.isBefore(a.eventDate, b.eventDate)) return 1
+    if (dates.isBefore(b.eventDate, a.eventDate)) return -1
+    return 0
+  })
 // )
 
 const seo = {
-  title: "Blog | Astro Odyssey Theme",
-  description: "Astro Odyssey Theme Blog Page",
-};
+  title: 'Blog | Astro Odyssey Theme',
+  description: 'Astro Odyssey Theme Blog Page',
+}
 ---
 
 <Layout {seo}>

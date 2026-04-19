@@ -1,23 +1,19 @@
 ---
-import { Button, Container, FeatureCard } from "@components/odyssey-theme";
-import { dates } from "@utils/dates";
+import { Button, Container, FeatureCard } from '@components/odyssey-theme'
+import { dates } from '@utils/dates'
 
-import HomeHeroSection from "../components/sections/heros/HomeHeroSection.astro";
-import Layout from "../layouts/Page.astro";
-import { homeDetails } from "data/home";
-import { MarkdownFile } from "./../types/generics.type";
+import { homeDetails } from 'data/home'
+import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro'
+import Layout from '../layouts/Page.astro'
+import type { MarkdownFile } from './../types/generics.type'
 
-const posts: MarkdownFile[] = Object.values(
-	await import.meta.glob("./events/posts/*.mdx", { eager: true }),
-)
-	.sort((a: MarkdownFile, b: MarkdownFile) => {
-		if (dates.isBefore(a.frontmatter.eventDate, b.frontmatter.eventDate))
-			return 1;
-		if (dates.isBefore(b.frontmatter.eventDate, a.frontmatter.eventDate))
-			return -1;
-		return 0;
-	})
-	.slice(0, 2);
+const posts: MarkdownFile[] = Object.values(await import.meta.glob('./events/posts/*.mdx', { eager: true }))
+  .sort((a: MarkdownFile, b: MarkdownFile) => {
+    if (dates.isBefore(a.frontmatter.eventDate, b.frontmatter.eventDate)) return 1
+    if (dates.isBefore(b.frontmatter.eventDate, a.frontmatter.eventDate)) return -1
+    return 0
+  })
+  .slice(0, 2)
 ---
 
 <Layout>

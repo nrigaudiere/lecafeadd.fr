@@ -1,10 +1,10 @@
 ---
-import { generics } from "data/generics";
+import { generics } from 'data/generics'
 
-const { href, imgSrc, title } = Astro.props;
-const img = imgSrc.substring(0, imgSrc.lastIndexOf(".")) ?? generics.logoUrl;
+const { href, imgSrc, title } = Astro.props
+const img = imgSrc.substring(0, imgSrc.lastIndexOf('.')) ?? generics.logoUrl
 
-console.log(img);
+console.log(img)
 ---
 
 <style>

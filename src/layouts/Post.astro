@@ -1,17 +1,17 @@
 ---
-import { Container } from "@components/odyssey-theme";
-import { generateTagData } from "../utils/helpers";
-import Layout from "./Page.astro";
-import { dates } from "@utils/dates";
+import { Container } from '@components/odyssey-theme'
+import { dates } from '@utils/dates'
+import { generateTagData } from '../utils/helpers'
+import Layout from './Page.astro'
 
 const {
   content: { title, description, eventDate, canonicalURL, featuredImage, tags },
-} = Astro.props;
+} = Astro.props
 
-let allTagsData = [];
+let allTagsData = []
 
 if (tags && tags.length > 0) {
-  allTagsData = generateTagData(tags);
+  allTagsData = generateTagData(tags)
 }
 
 const seo = {
@@ -20,7 +20,7 @@ const seo = {
   eventDate,
   canonicalURL,
   image: featuredImage,
-};
+}
 ---
 
 <Layout seo={seo}>
