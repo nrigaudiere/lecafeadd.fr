@@ -20,16 +20,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Setup Node @ ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
+
       - name: Install Node.js dependencies
         run: yarn install --immutable
         env:
           YARN_ENABLE_IMMUTABLE_INSTALLS: false
+
       - name: Lint
         run: yarn lint
+
   build:
     name: Astro
     runs-on: ubuntu-latest
@@ -39,6 +43,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
+
       - name: Cache Node Modules
         id: cache
         uses: actions/cache@v4
