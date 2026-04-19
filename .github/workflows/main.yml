@@ -20,9 +20,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          submodules: true
-          token: ${{ secrets.LPD_WEBSITE_SUBMODULES }}
       - name: Setup Node @ ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
