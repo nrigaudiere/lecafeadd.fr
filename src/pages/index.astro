@@ -1,30 +1,46 @@
 ---
-import { Container, FeatureCard } from "@components/odyssey-theme";
+import { Button, Container, FeatureCard } from "@components/odyssey-theme";
+import { dates } from "@utils/dates";
 
 import HomeHeroSection from "../components/sections/heros/HomeHeroSection.astro";
 import Layout from "../layouts/Page.astro";
+import { homeDetails } from "data/home";
+import { MarkdownFile } from "./../types/generics.type";
+
+const posts: MarkdownFile[] = Object.values(
+	await import.meta.glob("./events/posts/*.mdx", { eager: true }),
+)
+	.sort((a: MarkdownFile, b: MarkdownFile) => {
+		if (dates.isBefore(a.frontmatter.eventDate, b.frontmatter.eventDate))
+			return 1;
+		if (dates.isBefore(b.frontmatter.eventDate, a.frontmatter.eventDate))
+			return -1;
+		return 0;
+	})
+	.slice(0, 2);
 ---
 
 <Layout>
 	<HomeHeroSection />
 	<Container>
 		<section class="feature-card__section">
-			<h2>Évènements</h2>
-			<p>
-				Le café organise régulièrement des évènements pour ses adhérents afin de
-				créer du lien social.
-			</p>
+			<h2>{homeDetails.events.title}</h2>
+			<p>{homeDetails.events.description}</p>
 			<div class="feature-card__grid">
-				<FeatureCard
-					href="/landing-pages/landing-1"
-					title="Landing Page 1"
-					imgSrc="/assets/images/home/screenshots/landing-1"
-				/>
-				<FeatureCard
-					href="/landing-pages/landing-2"
-					title="Landing Page 2"
-					imgSrc="/assets/images/home/screenshots/landing-2"
-				/>
+				{
+					posts.map((p) => (
+						<FeatureCard
+							href={p.url}
+							title={p.frontmatter.title}
+							imgSrc={p.frontmatter.featuredImage}
+						/>
+					))
+				}
+			</div>
+			<div class="flex justify-center mt-10">
+				<Button href={homeDetails.events.cta.url} outlined>
+					{homeDetails.events.cta.title}
+				</Button>
 			</div>
 		</section>
 	</Container>

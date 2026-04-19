@@ -6,4 +6,12 @@ export const homeDetails = {
     title: "Adhérer à l'association",
     url: '/join',
   },
+  events: {
+    title: 'Évènements',
+    description: 'Le café organise régulièrement des évènements pour ses adhérents afin de créer du lien social.',
+    cta: {
+      title: 'Voir tous les évènements',
+      url: '/events',
+    },
+  },
 }
