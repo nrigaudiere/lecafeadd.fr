@@ -6,6 +6,7 @@
     // Add type definitions for our Vite runtime.
     "types": ["astro/client"],
     "strictNullChecks": true,
+    "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "paths": {
       "@config": ["config/*"],
