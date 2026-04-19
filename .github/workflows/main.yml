@@ -1,0 +1,55 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+env:
+  NODE_VERSION: "24.14.1"
+
+name: Main
+jobs:
+  lint:
+    name: Lint (Biome)
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.LPD_WEBSITE_SUBMODULES }}
+      - name: Setup Node @ ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install Node.js dependencies
+        run: yarn install --immutable
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+      - name: Lint
+        run: yarn lint
+  build:
+    name: Astro
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache Node Modules
+        id: cache
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: node-${{ env.NODE_VERSION }}-${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.json') }}-${{ hashFiles('**/package-lock.json') }}
+      - run: yarn install --frozen-lockfile
+      - name: Build
+        run: yarn build
