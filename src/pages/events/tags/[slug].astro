@@ -10,11 +10,11 @@ export async function getStaticPaths() {
   )
   const allCategoriesUnique = new Set()
 
-  sortedPosts.forEach(post => {
+  for (const post of sortedPosts) {
     post.frontmatter.tags?.map(tag => {
       allCategoriesUnique.add(tag)
     })
-  })
+  }
 
   const allCategoriesData = generateTagData(allCategoriesUnique)
   // map through the categories array

@@ -12,11 +12,11 @@ export function generateSlug(string) {
 
 export function generateTagData(categories) {
   const categoryData = []
-  categories.forEach(category => {
+  for (const category of categories) {
     categoryData.push({
       title: category,
       slug: `${generateSlug(category)}`,
     })
-  })
+  }
   return categoryData
 }
