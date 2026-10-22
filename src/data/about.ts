@@ -9,7 +9,7 @@ export const aboutDetails = {
   - Proposer des services répondant à la demande de la population locale, définis par l’association, en fonction des possibilités et acceptés par le Conseil d’administration, puis ratifiés par l’assemblée générale.
   - Proposer aux associations, aux artistes, …un lieu d'épanouissement, d'activités et d'initiatives.
   - Valoriser les activités locales (artisans, commerce, agriculture…) et toute activité d’intérêt général avec des partenaires de proximité.`,
-  imgUrl: '/assets/images/about.png',
+  imgUrl: '/assets/images/about/main.png',
   timelineItems: [
     {
       date: '22 mars 2024',
@@ -20,7 +20,7 @@ export const aboutDetails = {
       date: '22 janvier 2025',
       title: 'Début des travaux',
       description:
-        'Les travaux de création du café sont démarrés afin de préparer le lieu fourni par la mairie. Premier bilan : déplacement des encombrants, terrassement / aplanissement du terrain, démolition du plafond du réfectoire...',
+        'Les travaux de création du café ont démarré afin de préparer le lieu fourni par la mairie. Premier bilan : déplacement des encombrants, terrassement / aplanissement du terrain, démolition du plafond du réfectoire...',
     },
     {
       date: '05 octobre 2025',
