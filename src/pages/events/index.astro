@@ -3,6 +3,7 @@ import { BlogPostsList, Container, TextCardSection } from '@components/odyssey-t
 import { dates } from '@utils/dates'
 // import NewsletterForm from "../../components/forms/NewsletterForm.astro";
 import Layout from '../../layouts/Page.astro'
+import settings from '../../config/settings'
 
 const posts = Object.values(await import.meta.glob('./posts/*.mdx', { eager: true }))
   .map(({ frontmatter, url }) => ({
@@ -22,8 +23,8 @@ const posts = Object.values(await import.meta.glob('./posts/*.mdx', { eager: tru
 // )
 
 const seo = {
-  title: 'Blog | Astro Odyssey Theme',
-  description: 'Astro Odyssey Theme Blog Page',
+  title: `Évènements | ${settings.name}`,
+  description: 'Évènements passés et à venir proposés par le Café ADD.',
 }
 ---
 
