@@ -7,12 +7,13 @@ import { generateTagData } from '../../../utils/helpers'
 export async function getStaticPaths() {
   const allPosts = Object.values(await import.meta.glob('../../posts/*.mdx', { eager: true }))
   const sortedPosts = allPosts.sort(
-    (a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf(),
+    (a, b) =>
+      new Date(b.frontmatter.eventDate).valueOf() - new Date(a.frontmatter.eventDate).valueOf(),
   )
   const allCategoriesUnique = new Set()
 
   for (const post of sortedPosts) {
-    post.frontmatter.tags?.map(tag => {
+    post.frontmatter.tags?.forEach((tag) => {
       allCategoriesUnique.add(tag)
     })
   }
@@ -21,7 +22,7 @@ export async function getStaticPaths() {
   // map through the categories array
   return allCategoriesData.map(tag => {
     // filter the posts that match the given category
-    const posts = sortedPosts.filter(post => post.frontmatter.tags.includes(tag.title))
+    const posts = sortedPosts.filter((post) => post.frontmatter.tags?.includes(tag.title))
     return {
       params: { slug: tag.slug },
       props: {
