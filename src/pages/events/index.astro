@@ -1,9 +1,9 @@
 ---
 import { BlogPostsList, Container, TextCardSection } from '@components/odyssey-theme'
 import { dates } from '@utils/dates'
+import settings from '../../config/settings'
 // import NewsletterForm from "../../components/forms/NewsletterForm.astro";
 import Layout from '../../layouts/Page.astro'
-import settings from '../../config/settings'
 
 const posts = Object.values(await import.meta.glob('./posts/*.mdx', { eager: true }))
   .map(({ frontmatter, url }) => ({
