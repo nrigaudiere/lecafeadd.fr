@@ -4,7 +4,7 @@ import Layout from '../../../layouts/Page.astro'
 import { generateTagData } from '../../../utils/helpers'
 
 export async function getStaticPaths() {
-  const allPosts = Object.values(await import.meta.glob('./posts/*.mdx', { eager: true }))
+  const allPosts = Object.values(await import.meta.glob('../../posts/*.mdx', { eager: true }))
   const sortedPosts = allPosts.sort(
     (a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf(),
   )
