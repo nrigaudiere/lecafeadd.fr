@@ -37,6 +37,26 @@ const { navData, rightMenu } = Astro.props
 
     navHeader.toggleAttribute("mobile-menu-open");
   }
+
+  // Smooth header height reduction on scroll
+  const header = document.querySelector("#odysseyNavHeader");
+  const initialHeight = header?.getBoundingClientRect().height || 80;
+  const reducedHeight = 60; // Reduced height in pixels
+  let lastScroll = 0;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll <= 0) {
+      header.style.height = `${initialHeight}px`;
+    } else if (currentScroll > lastScroll && header.style.height !== `${reducedHeight}px`) {
+      // Scrolling down
+      header.style.height = `${reducedHeight}px`;
+    } else if (currentScroll < lastScroll && header.style.height !== `${initialHeight}px`) {
+      // Scrolling up
+      header.style.height = `${initialHeight}px`;
+    }
+    lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+  });
 </script>
 
 <header
@@ -89,6 +109,7 @@ const { navData, rightMenu } = Astro.props
     top: 0;
     z-index: 20;
     background-color: var(--theme-bg);
+    transition: height 0.3s ease-in-out;
   }
   header.header--right {
     display: grid;
