@@ -96,6 +96,7 @@ const { navData, rightMenu } = Astro.props
 
 <style>
   header {
+    --header-shrink: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     width: 100%;
     padding: 1rem 2.5rem;
     display: flex;
@@ -105,13 +106,14 @@ const { navData, rightMenu } = Astro.props
     top: 0;
     z-index: 20;
     background-color: var(--theme-bg);
-    transition: padding 0.3s ease-in-out;
+    transition: padding var(--header-shrink);
   }
   header[data-shrunk] {
-    padding-block: 0.4rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
   }
   .header-logo__link :global(div) {
-    transition: width 0.3s ease-in-out;
+    transition: width var(--header-shrink);
   }
   header[data-shrunk] .header-logo__link :global(div) {
     width: 3.25rem;
