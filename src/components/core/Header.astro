@@ -38,24 +38,20 @@ const { navData, rightMenu } = Astro.props
     navHeader.toggleAttribute("mobile-menu-open");
   }
 
-  // Smooth header height reduction on scroll
-  const header = document.querySelector("#odysseyNavHeader");
-  const initialHeight = header?.getBoundingClientRect().height || 80;
-  const reducedHeight = 60; // Reduced height in pixels
-  let lastScroll = 0;
+  // Shrink header on scroll down, restore on scroll up or at top
+  const shrinkThreshold = 4;
+  let lastScroll = window.scrollY;
 
   window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset;
+    const currentScroll = window.scrollY;
     if (currentScroll <= 0) {
-      header.style.height = `${initialHeight}px`;
-    } else if (currentScroll > lastScroll && header.style.height !== `${reducedHeight}px`) {
-      // Scrolling down
-      header.style.height = `${reducedHeight}px`;
-    } else if (currentScroll < lastScroll && header.style.height !== `${initialHeight}px`) {
-      // Scrolling up
-      header.style.height = `${initialHeight}px`;
+      navHeader.removeAttribute("data-shrunk");
+    } else if (currentScroll - lastScroll > shrinkThreshold) {
+      navHeader.setAttribute("data-shrunk", "");
+    } else if (currentScroll - lastScroll < -shrinkThreshold) {
+      navHeader.removeAttribute("data-shrunk");
     }
-    lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+    lastScroll = currentScroll;
   });
 </script>
 
@@ -109,7 +105,16 @@ const { navData, rightMenu } = Astro.props
     top: 0;
     z-index: 20;
     background-color: var(--theme-bg);
-    transition: height 0.3s ease-in-out;
+    transition: padding 0.3s ease-in-out;
+  }
+  header[data-shrunk] {
+    padding-block: 0.4rem;
+  }
+  .header-logo__link :global(div) {
+    transition: width 0.3s ease-in-out;
+  }
+  header[data-shrunk] .header-logo__link :global(div) {
+    width: 3.25rem;
   }
   header.header--right {
     display: grid;
