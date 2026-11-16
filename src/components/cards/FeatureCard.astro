@@ -1,10 +1,11 @@
 ---
+import fs from 'node:fs'
+
 import { generics } from 'data/generics'
 
 const { href, imgSrc, title } = Astro.props
 const img = imgSrc.substring(0, imgSrc.lastIndexOf('.')) ?? generics.logoUrl
-
-console.log(img)
+const webpSrc = fs.existsSync(`public${img}.webp`) ? `${img}.webp` : null
 ---
 
 <style>
@@ -54,10 +55,10 @@ console.log(img)
       <h3 class="feature-card__title">{title}</h3>
       <!-- I would like to swap this out with Astro's Image integration soon but was having some issues with it at the moment so we're going old school here. -->
       <picture>
-        <source srcset={`${img}.webp`} type="image/webp" />
+        {webpSrc && <source srcset={webpSrc} type="image/webp" />}
         <img
           class="feature-card__img"
-          src={`${img}.png`}
+          src={imgSrc}
           alt={title}
           loading="lazy"
           width="780"
