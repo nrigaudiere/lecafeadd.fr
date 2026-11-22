@@ -2,6 +2,8 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "baseUrl": "src",
     // Add type definitions for our Vite runtime.
     "types": ["astro/client"],
