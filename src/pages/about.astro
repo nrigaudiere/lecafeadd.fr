@@ -1,5 +1,5 @@
 ---
-import { TextSection } from '@components/odyssey-theme'
+import { Button, CtaCardSection, TextSection, ThreeColumnTextSection } from '@components/odyssey-theme'
 import Timeline from '@components/ui/Timeline.astro'
 import { aboutDetails } from 'data/about'
 import HeroSection from '../components/sections/heros/HeroSection.astro'
@@ -13,12 +13,16 @@ const seo = {
 ---
 
 <Layout {seo}>
+  <div class="about-page">
   <HeroSection>
     <div slot="text-container">
       <h1>{aboutDetails.title}</h1>
-      <p>
-        {aboutDetails.description}
-      </p>
+      <p>{aboutDetails.mission.intro}</p>
+      <ul class="mission-list">
+        {aboutDetails.mission.goals.map((goal) => (
+          <li class="list-disc" >{goal}</li>
+        ))}
+      </ul>
     </div>
     <picture slot="image-container">
       <img
@@ -29,7 +33,107 @@ const seo = {
     </picture>
   </HeroSection>
 
+  <ThreeColumnTextSection>
+    <div slot="column-1-body">
+      <h3>{aboutDetails.associationCards[0].title}</h3>
+      <p>{aboutDetails.associationCards[0].description}</p>
+    </div>
+    <div slot="column-2-body">
+      <h3>{aboutDetails.associationCards[1].title}</h3>
+      <p>{aboutDetails.associationCards[1].description}</p>
+    </div>
+    <div slot="column-3-body">
+      <h3>{aboutDetails.associationCards[2].title}</h3>
+      <p>{aboutDetails.associationCards[2].description}</p>
+    </div>
+  </ThreeColumnTextSection>
+
+  <TextSection>
+    <h2>L’association en chiffres</h2>
+    <div class="stats stats-vertical md:stats-horizontal w-full">
+      {
+        aboutDetails.keyFigures.map((figure) => (
+          <div class="stat">
+            <div class="stat-title">{figure.title}</div>
+            <div class="stat-value">{figure.value}</div>
+            {figure.description && (
+              <div class="stat-desc">{figure.description}</div>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </TextSection>
+
+  <ThreeColumnTextSection>
+    <div slot="column-1-body">
+      <h3>{aboutDetails.venueCards[0].title}</h3>
+      <p>{aboutDetails.venueCards[0].description}</p>
+    </div>
+    <div slot="column-2-body">
+      <h3>{aboutDetails.venueCards[1].title}</h3>
+      <p>{aboutDetails.venueCards[1].description}</p>
+    </div>
+    <div slot="column-3-body">
+      <h3>{aboutDetails.venueCards[2].title}</h3>
+      <p>{aboutDetails.venueCards[2].description}</p>
+    </div>
+  </ThreeColumnTextSection>
+
+  <TextSection>
+    <h2 class="text-center">Notre historique</h2>
+  </TextSection>
   <TextSection narrow>
     <Timeline items={aboutDetails.timelineItems} />
   </TextSection>
+
+  <CtaCardSection
+    background="var(--theme-surface-2)"
+    color="var(--theme-on-surface-2)"
+  >
+    <h2>Rejoignez-nous</h2>
+    <p>
+      Le café A D-D accueille les adhérents de toutes villes, toutes régions et
+      tous pays : adhérents à l’année (10 €) ou à la journée (1 €).
+    </p>
+    <Button href="/join">Adhérer à l'association</Button>
+    <p>
+      Nous contacter :
+      <a href={`mailto:${aboutDetails.contact.email}`}>{aboutDetails.contact.email}</a>
+      — {aboutDetails.contact.website}
+    </p>
+  </CtaCardSection>
+  </div>
 </Layout>
+
+<style>
+  .about-page {
+    --section-margin: 6rem;
+  }
+
+  .stats {
+    background-color: var(--theme-surface-1);
+    border-radius: var(--theme-shape-radius);
+    color: var(--theme-on-surface-1);
+  }
+
+  .stat-title,
+  .stat-value,
+  .stat-desc {
+    color: inherit;
+  }
+
+  .stat-title,
+  .stat-desc {
+    opacity: 0.7;
+  }
+
+  .mission-list {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+
+  .mission-list li + li {
+    margin-top: 0.5rem;
+  }
+</style>
