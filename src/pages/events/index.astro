@@ -5,22 +5,31 @@ import settings from '../../config/settings'
 // import NewsletterForm from "../../components/forms/NewsletterForm.astro";
 import Layout from '../../layouts/Page.astro'
 
-const posts = Object.values(await import.meta.glob('./posts/*.mdx', { eager: true }))
-  .map(({ frontmatter, url }) => ({
-    title: frontmatter.title,
-    description: frontmatter.description,
-    authors: frontmatter.authors,
-    eventDate: frontmatter.eventDate,
-    featuredImage: frontmatter.featuredImage,
-    excerpt: frontmatter.excerpt,
-    href: url,
-  }))
+const posts = Object.values(await import.meta.glob('./posts/*.mdx', { eager: true })).map(({ frontmatter, url }) => ({
+  title: frontmatter.title,
+  description: frontmatter.description,
+  authors: frontmatter.authors,
+  eventDate: frontmatter.eventDate,
+  featuredImage: frontmatter.featuredImage,
+  excerpt: frontmatter.excerpt,
+  href: url,
+}))
+const today = dates.format(new Date(), 'YYYY-MM-DD')
+const isPast = post => dates.isBefore(dates.format(post.eventDate, 'YYYY-MM-DD'), today)
+
+const upcomingEvents = posts
+  .filter(post => !isPast(post))
   .sort((a, b) => {
-    if (dates.isBefore(a.eventDate, b.eventDate)) return 1
-    if (dates.isBefore(b.eventDate, a.eventDate)) return -1
+    if (dates.isBefore(a.eventDate, b.eventDate)) return -1
+    if (dates.isBefore(b.eventDate, a.eventDate)) return 1
     return 0
   })
-// )
+
+const pastEvents = posts.filter(isPast).sort((a, b) => {
+  if (dates.isBefore(a.eventDate, b.eventDate)) return 1
+  if (dates.isBefore(b.eventDate, a.eventDate)) return -1
+  return 0
+})
 
 const seo = {
   title: `Évènements | ${settings.name}`,
@@ -37,9 +46,22 @@ const seo = {
       </p>
       <!-- <NewsletterForm /> -->
     </TextCardSection>
-    <section class="blog-posts-list__section">
-      <BlogPostsList posts={posts} />
-    </section>
+    {
+      upcomingEvents.length > 0 && (
+        <section class="blog-posts-list__section">
+          <h2>Évènements à venir</h2>
+          <BlogPostsList posts={upcomingEvents} />
+        </section>
+      )
+    }
+    {
+      pastEvents.length > 0 && (
+        <section class="blog-posts-list__section">
+          <h2>Évènements passés</h2>
+          <BlogPostsList posts={pastEvents} />
+        </section>
+      )
+    }
   </Container>
 </Layout>
 
