@@ -21,6 +21,7 @@ import { isEmail, useForm } from '@mantine/form'
 import { useState } from 'react'
 
 import '@mantine/core/styles.css'
+import './MembershipForm.css'
 
 const CHEQUE_ORDER = 'Association Café associatif de Droue sur Drouette'
 const IBAN = 'FR76 1440 6001 3590 0300 4190 842'
