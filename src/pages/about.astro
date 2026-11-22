@@ -1,5 +1,5 @@
 ---
-import { TextSection } from '@components/odyssey-theme'
+import { Button, CtaCardSection, TextSection, ThreeColumnTextSection } from '@components/odyssey-theme'
 import Timeline from '@components/ui/Timeline.astro'
 import { aboutDetails } from 'data/about'
 import HeroSection from '../components/sections/heros/HeroSection.astro'
@@ -30,6 +30,71 @@ const seo = {
   </HeroSection>
 
   <TextSection narrow>
+    <h2>Notre historique</h2>
     <Timeline items={aboutDetails.timelineItems} />
   </TextSection>
+
+  <ThreeColumnTextSection>
+    <div slot="column-1-body">
+      <h2>{aboutDetails.associationCards[0].title}</h2>
+      <p>{aboutDetails.associationCards[0].description}</p>
+    </div>
+    <div slot="column-2-body">
+      <h2>{aboutDetails.associationCards[1].title}</h2>
+      <p>{aboutDetails.associationCards[1].description}</p>
+    </div>
+    <div slot="column-3-body">
+      <h2>{aboutDetails.associationCards[2].title}</h2>
+      <p>{aboutDetails.associationCards[2].description}</p>
+    </div>
+  </ThreeColumnTextSection>
+
+  <TextSection>
+    <h2>L’association en chiffres</h2>
+    <div class="stats stats-vertical md:stats-horizontal w-full">
+      {
+        aboutDetails.keyFigures.map((figure) => (
+          <div class="stat">
+            <div class="stat-title">{figure.title}</div>
+            <div class="stat-value">{figure.value}</div>
+            {figure.description && (
+              <div class="stat-desc">{figure.description}</div>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </TextSection>
+
+  <ThreeColumnTextSection>
+    <div slot="column-1-body">
+      <h2>{aboutDetails.venueCards[0].title}</h2>
+      <p>{aboutDetails.venueCards[0].description}</p>
+    </div>
+    <div slot="column-2-body">
+      <h2>{aboutDetails.venueCards[1].title}</h2>
+      <p>{aboutDetails.venueCards[1].description}</p>
+    </div>
+    <div slot="column-3-body">
+      <h2>{aboutDetails.venueCards[2].title}</h2>
+      <p>{aboutDetails.venueCards[2].description}</p>
+    </div>
+  </ThreeColumnTextSection>
+
+  <CtaCardSection
+    background="var(--theme-surface-2)"
+    color="var(--theme-on-surface-2)"
+  >
+    <h2>Rejoignez-nous</h2>
+    <p>
+      Le café A D-D accueille les adhérents de toutes villes, toutes régions et
+      tous pays : adhérents à l’année (10 €) ou à la journée (1 €).
+    </p>
+    <Button href="/join">Adhérer à l'association</Button>
+    <p>
+      Nous contacter :
+      <a href={`mailto:${aboutDetails.contact.email}`}>{aboutDetails.contact.email}</a>
+      — {aboutDetails.contact.website}
+    </p>
+  </CtaCardSection>
 </Layout>
