@@ -1,6 +1,10 @@
 ---
+import fs from 'node:fs'
+import path from 'node:path'
+
 import { Container } from '@components/odyssey-theme'
 import { dates } from '@utils/dates'
+import { Carousel, Modal } from 'webcoreui/astro'
 import { generateTagData } from '../utils/helpers'
 import Layout from './Page.astro'
 
@@ -20,6 +24,40 @@ const seo = {
   eventDate,
   canonicalURL,
   image: featuredImage,
+}
+
+// carousel pictures; a same-stem .webp twin is not an extra picture and the featured image already headlines the post
+let pictures: { src: string }[] = []
+
+if (featuredImage) {
+  const featuredStem = path.basename(featuredImage, path.extname(featuredImage))
+  const urlPrefix = featuredImage.slice(0, featuredImage.lastIndexOf('/') + 1)
+  const dir = path.join(process.cwd(), 'public', urlPrefix)
+
+  if (fs.existsSync(dir)) {
+    const stems = new Map<string, string>()
+
+    for (const file of fs.readdirSync(dir)) {
+      const ext = path.extname(file).toLowerCase()
+
+      if (!['.jpg', '.jpeg', '.png', '.webp', '.avif'].includes(ext)) {
+        continue
+      }
+
+      const stem = path.basename(file, ext)
+
+      if (!stems.has(stem) || (stems.get(stem) !== '.webp' && ext === '.webp')) {
+        stems.set(stem, ext)
+      }
+    }
+
+    if (stems.size > 1) {
+      pictures = [...stems.entries()]
+        .filter(([stem]) => stem !== featuredStem)
+        .sort(([a], [b]) => a.localeCompare(b, 'fr', { numeric: true }))
+        .map(([stem, ext]) => ({ src: encodeURI(`${urlPrefix}${stem}${ext}`) }))
+    }
+  }
 }
 ---
 
@@ -49,7 +87,62 @@ const seo = {
       <slot />
     </article>
   </Container>
+
+  {
+    pictures.length > 0 && (
+      <Container narrow>
+        <Carousel
+          items={pictures.length}
+          subText="{0} / {1}"
+          className="post-gallery"
+        >
+          {pictures.map((picture, index) => (
+            <li>
+              <button
+                type="button"
+                class="post-gallery-trigger"
+                data-src={picture.src}
+                data-alt={`${title} — photo ${index + 1}`}
+              >
+                <img
+                  class="post-gallery__image"
+                  src={picture.src}
+                  alt={`${title} — photo ${index + 1}`}
+                  loading="lazy"
+                />
+              </button>
+            </li>
+          ))}
+        </Carousel>
+        <Modal transparent className="post-gallery-modal">
+          <img class="post-gallery-modal__image" alt="" />
+        </Modal>
+      </Container>
+    )
+  }
 </Layout>
+
+<script>
+  import { modal } from 'webcoreui'
+
+  const galleryModal = modal('.post-gallery-modal')
+
+  if (galleryModal) {
+    const modalImage = document.querySelector<HTMLImageElement>('.post-gallery-modal__image')
+
+    document.querySelectorAll<HTMLButtonElement>('.post-gallery-trigger').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!modalImage) {
+          return
+        }
+
+        modalImage.src = button.dataset.src ?? ''
+        modalImage.alt = button.dataset.alt ?? ''
+        galleryModal.open()
+      })
+    })
+  }
+</script>
 
 <style>
   #article {
@@ -79,5 +172,45 @@ const seo = {
   .post-layout__date {
     margin-bottom: 1rem;
     opacity: 0.84;
+  }
+
+  :global(.post-gallery) {
+    margin-bottom: 3rem;
+  }
+
+  .post-gallery__image {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--theme-shape-radius);
+  }
+
+  .post-gallery-trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    border-radius: var(--theme-shape-radius);
+    cursor: zoom-in;
+  }
+
+  :global(.post-gallery-modal) {
+    max-width: 92vw;
+  }
+
+  :global(.post-gallery-modal + div) {
+    background: rgba(146, 146, 146, 0.35);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+  }
+
+  .post-gallery-modal__image {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: var(--theme-shape-radius);
   }
 </style>

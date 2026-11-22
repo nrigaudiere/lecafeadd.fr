@@ -3,6 +3,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import icon from 'astro-icon'
 import { defineConfig } from 'astro/config'
+import { webcore } from 'webcoreui/integration'
 
 import tailwindcss from '@tailwindcss/vite'
 
@@ -15,7 +16,7 @@ export default defineConfig({
   sitemap: true,
 
   // Add renderers to the config
-  integrations: [sitemap(), mdx(), lit(), icon()],
+  integrations: [webcore(), sitemap(), mdx(), lit(), icon()],
 
   vite: {
     plugins: [tailwindcss()],

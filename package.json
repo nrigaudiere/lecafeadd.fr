@@ -24,13 +24,15 @@
     "astro": "7.4.7",
     "astro-icon": "^1.2.0",
     "lit": "^3.3.3",
+    "sass": "^1.108.2",
     "typescript": "^6.0.3"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "daisyui": "^5.7.28",
     "dayjs": "^1.11.23",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "webcoreui": "^1.5.0"
   },
   "packageManager": "yarn@4.14.1"
 }
