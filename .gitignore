@@ -46,4 +46,5 @@ icon.d.ts
 .astro/dev.json
 .astro/settings.json
 .astro/types.d.ts
+.astro/
 .yarn/install-state.gz

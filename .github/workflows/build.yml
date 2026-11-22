@@ -11,33 +11,12 @@ on:
 env:
   NODE_VERSION: "24.14.1"
 
-name: Main
+name: Build
 jobs:
-  lint:
-    name: Lint (Biome)
-    runs-on: ubuntu-latest
-    timeout-minutes: 2
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node @ ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install Node.js dependencies
-        run: yarn install --immutable
-        env:
-          YARN_ENABLE_IMMUTABLE_INSTALLS: false
-
-      - name: Lint
-        run: yarn lint
-
   build:
-    name: Astro
+    name: Build & Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v4
@@ -55,3 +34,10 @@ jobs:
       - run: yarn install --frozen-lockfile
       - name: Build
         run: yarn build
+
+      - name: Deploy to Cloudflare Pages
+        if: github.event_name == 'push'
+        run: npx --yes wrangler pages deploy ./dist --project-name=lecafeadd-fr --branch=${{ github.ref_name }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
