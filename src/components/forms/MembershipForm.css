@@ -1,0 +1,15 @@
+.mantine-Input-input {
+  border-color: var(--mantine-color-cafe-5);
+}
+
+.mantine-Input-input::placeholder {
+  color: lightgrey;
+}
+
+.mantine-Checkbox-input {
+  border-color: var(--mantine-color-cafe-5);
+}
+
+.mantine-Radio-radio {
+  border-color: var(--mantine-color-cafe-5);
+}

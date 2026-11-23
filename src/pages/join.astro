@@ -1,4 +1,98 @@
-<script>
-  window.open("/assets/documents/BULLETIN ADHESION - 2026.pdf");
-  window.location.pathname = "/";
-</script>
+---
+import { Button, Container } from '@components/odyssey-theme'
+import MembershipForm from '../components/forms/MembershipForm'
+import settings from '../config/settings'
+import Layout from '../layouts/Page.astro'
+
+const seo = {
+  title: `Adhérer | ${settings.name}`,
+  description:
+    "Adhérez à l'association Le Café ADD : bulletin d'adhésion 2025-2026, cotisation annuelle de 10 €, règlement en espèces, par chèque, virement ou carte bancaire.",
+}
+
+const bulletinPdfUrl = '/assets/documents/BULLETIN%20ADHESION%20-%202026.pdf'
+const helloassoUrl =
+  'https://www.helloasso.com/associations/association-cafe-associatif-de-droue-sur-drouette/adhesions/adhesion-2026'
+const chequeOrder = 'Association Café associatif de Droue sur Drouette'
+const iban = 'FR76 1440 6001 3590 0300 4190 842'
+const bic = 'AGRIFRPP844'
+---
+
+<Layout seo={seo}>
+	<Container>
+		<section class="join-hero__section">
+			<div class="join-hero__text-section">
+				<h1>Adhérer au Café ADD</h1>
+				<p>
+					Adhérez à l'Association Café Associatif de Droue sur Drouette (N° RNA : W281010322). Le
+					bulletin d'adhésion ci-contre est transmis directement au bureau de l'association.
+				</p>
+				<p>
+					La cotisation annuelle est de <strong>10 €</strong>. Vous pouvez également soutenir
+					l'association par un don facultatif, mais bienvenu.
+				</p>
+				<p>Le règlement s'effectue :</p>
+				<ul>
+					<li>en espèces, au café ;</li>
+					<li>par chèque, à l'ordre de « {chequeOrder} » ;</li>
+					<li>par virement bancaire : IBAN <code>{iban}</code>, BIC <code>{bic}</code> ;</li>
+					<li>
+						par carte bancaire sur
+						<a href={helloassoUrl} target="_blank" rel="noopener noreferrer">HelloAsso</a>.
+					</li>
+				</ul>
+				<p>
+					Vous préférez le papier ? Téléchargez le bulletin, puis déposez-le complété et signé dans la
+					boîte à lettres au 1, rue de Chaleine à Droue sur Drouette.
+				</p>
+				<Button href={bulletinPdfUrl} newTab>Bulletin papier (PDF)</Button>
+				<p class="rgpd-notice">
+					En complétant le bulletin d'adhésion, j'autorise l'association « Le Café ADD » à utiliser les
+					informations contenues dans ce formulaire dans l'unique but de communiquer avec moi au moyen
+					de courriers postaux ou de mails. Je suis informé(e) qu'en aucun cas mes informations
+					personnelles ne seront diffusées ou transmises à des tiers, et que j'ai un droit d'accès à
+					mes informations personnelles pour les vérifier, les corriger ou les effacer (Règlement
+					général sur la protection des données — RGPD n° 2016/679).
+				</p>
+			</div>
+			<div class="col-2__container">
+				<MembershipForm client:load />
+			</div>
+		</section>
+	</Container>
+</Layout>
+
+<style>
+	.join-hero__section {
+		margin: var(--section-margin) auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+	}
+	.join-hero__text-section {
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		background-color: var(--theme-surface-1);
+		border-radius: var(--theme-shape-radius)
+	}
+	.join-hero__text-section ul {
+		margin: 0;
+		padding-left: 1.25rem;
+	}
+	.col-2__container {
+		display: flex;
+		flex-direction: column;
+	}
+	.rgpd-notice {
+		font-size: 0.8rem;
+		opacity: 0.75;
+		margin-top: 1rem;
+	}
+	@media (max-width: 768px) {
+		.join-hero__section {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
